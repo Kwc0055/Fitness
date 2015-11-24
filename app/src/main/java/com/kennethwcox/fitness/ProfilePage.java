@@ -48,8 +48,6 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
     public static final String TAG = ProfilePage.class.getSimpleName();
     private static final int SELECT_PICTURE_ACTIVITY_REQUEST_CODE = 0;
 
-    public static String USER_FILE_DATA = "com.kennethwcox.fitness";
-
     private ImageView image;
     private String imageUri = "";
     private Uri uri;
