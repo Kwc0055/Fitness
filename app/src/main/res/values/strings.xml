@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Health and Fitness</string>
+
+    <!-- About Page Strings-->
+    <string name="title_activity_about_page">About</string>
+    <string name="myName">Developer: Kenneth Cox</string>
+    <string name="versionName">Version: 0.5.5</string>
+
+    <!-- menu strings-->
+    <string name="about">About</string>
+    <string name="profile_edit">Edit Profile</string>
+
+    <!-- Home Page Strings-->
+    <string name="title_activity_home_page">Health and Fitness</string>
+    <string name="homePageText">Content being added soon!</string>
+
+    <!-- BMI Page Strings-->
+    <string name="title_activity_bmi">BMI Calculator</string>
+    <string name="height">Enter Your Height</string>
+    <string name="weight"><i>Enter Your Weight (lbs)</i></string>
+    <string name="checkbtn">Check</string>
+    <string name="result_txt">Result</string>
+
+    <!-- Stopwatch Page Strings-->
+    <string name="title_activity_stopwatch">Stopwatch</string>
+    <string name="startBtn">Start</string>
+    <string name="resetBtn">Reset</string>
+    <string name="pauseBtn">Pause</string>
+    <string name="lapBtn">Lap</string>
+    <string name="stopBtn">Stop</string>
+
+    <!-- Navigation Drawer List Strings-->
+    <string name="title_section0">Home</string>
+    <string name="title_section1">BMI Calculator</string>
+    <string name="title_section2">StopWatch</string>
+    <string name="title_section3">Profile</string>
+    <string name="title_section4">Map</string>
+    <string name="title_section5">Coming soon!</string>
+
+    <!-- Profile Page Strings-->
+    <string name="title_activity_profile_page">Profile</string>
+
+    <!-- Credentials Page Strings-->
+    <string name="title_activity_credentials_page">Edit Profile</string>
+    <string name="nameEdit"><i>Name</i></string>
+    <string name="ageEdit"><i>Age</i></string>
+    <string name="weightEdit"><i>Weight(lbs)</i></string>
+    <string name="inchesEdit"><i>Height (in)</i></string>
+    <string name="feetEdit"><i>Height (ft)</i></string>
+    <string name="Save">Save</string>
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_closed">Close</string>
+    <string name="title_activity_maps_page">Map</string>
+
+</resources>

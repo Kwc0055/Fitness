@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.kennethwcox.fitness.HomePage">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar"/>
+
+        <ImageView
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:id="@+id/imageView"
+            android:layout_below="@+id/app_bar"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/health_and_fitness" />
+
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/fragment_navigation_drawer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:layout="@layout/fragment_navigation_drawer"
+        android:name="com.kennethwcox.fitness.NavigationDrawerFragment"
+        tools:layout="@layout/fragment_navigation_drawer" />
+
+
+</android.support.v4.widget.DrawerLayout>
+
+

@@ -1,0 +1,133 @@
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    tools:context=".BMI_calculator">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar"/>
+
+        <TextView
+            android:text="@string/height"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:id="@+id/BMI_height"
+            android:layout_marginTop="45dp"
+            android:layout_below="@+id/app_bar"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/BMI_height_ft_edit"
+            android:width="45dp"
+            android:layout_below="@+id/BMI_height"
+            android:layout_alignLeft="@+id/BMI_weight_text"
+            android:layout_alignStart="@+id/BMI_weight_text"
+            android:nextFocusDown="@+id/BMI_height_in_edit"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/BMI_height_in_edit"
+            android:width="45dp"
+            android:layout_alignTop="@+id/BMI_height_ft_edit"
+            android:layout_alignRight="@+id/BMI_weight_text"
+            android:layout_alignEnd="@+id/BMI_weight_text"
+            android:nextFocusRight="@id/BMI_height_in_edit"/>
+
+        <TextView
+            android:text="Ft"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:id="@+id/BMI_feet"
+            android:layout_below="@+id/BMI_height"
+            android:layout_toRightOf="@+id/BMI_height_ft_edit" />
+
+        <TextView
+            android:text="In"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:id="@+id/BMI_inches"
+            android:layout_below="@+id/BMI_height"
+            android:layout_toRightOf="@+id/BMI_height_in_edit" />
+
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/BMI_weight_text"
+            android:layout_below="@+id/BMI_height_ft_edit"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:text="@string/checkbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/BMI_calc"
+            android:layout_below="@+id/BMI_weight_text"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="@string/result_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/BMI_result"
+            android:layout_below="@+id/BMI_calc"
+            android:layout_centerHorizontal="true" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar"
+            android:layout_marginTop="36dp"
+            android:layout_below="@+id/BMI_result"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/classification"
+            android:layout_below="@+id/seekBar"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <fragment
+            android:id="@+id/fragment_navigation_drawer"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:layout="@layout/fragment_navigation_drawer"
+            android:name="com.kennethwcox.fitness.NavigationDrawerFragment"
+            tools:layout="@layout/fragment_navigation_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,102 @@
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.kenneth.practice.Stopwatch">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="00:00:00"
+            android:id="@+id/timer"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/app_bar"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/startBtn"
+            android:id="@+id/startBtn"
+            android:onClick="startClick"
+            android:layout_below="@id/timer" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resetBtn"
+            android:id="@+id/resetBtn"
+            android:onClick="resetClick"
+            android:layout_below="@id/timer"
+            android:layout_alignEnd="@id/app_bar"
+            android:layout_alignRight="@id/app_bar"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stopBtn"
+            android:id="@+id/stopBtn"
+            android:onClick="stopClick"
+            android:layout_below="@id/timer"
+            android:layout_alignStart="@id/app_bar"
+            android:layout_alignLeft="@id/app_bar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=".0"
+            android:id="@+id/timerMS"
+            android:layout_below="@id/app_bar"
+            android:layout_toRightOf="@id/timer"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lapBtn"
+            android:id="@+id/lapBtn"
+            android:onClick="lapClick"
+            android:layout_below="@id/timer"
+            android:layout_centerHorizontal="true"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lapTimeList"
+            android:layout_below="@id/lapBtn"/>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <fragment
+        android:id="@+id/fragment_navigation_drawer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:layout="@layout/fragment_navigation_drawer"
+        android:name="com.kennethwcox.fitness.NavigationDrawerFragment"
+        tools:layout="@layout/fragment_navigation_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
