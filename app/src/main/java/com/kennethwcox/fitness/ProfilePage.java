@@ -5,18 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,16 +26,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class ProfilePage extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks{
+
+public class ProfilePage extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     Context context;
 
@@ -51,10 +38,9 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
     private ImageView image;
     private String imageUri = "";
     private Uri uri;
-    private SharedPreferences savedData;
+    public SharedPreferences savedData;
     private Bitmap bm;
     public boolean dialogCheck;
-
 
 
     TextView name;
@@ -64,7 +50,6 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
     TextView weight;
 
     //path: /data/data/com.kennethwcox.fitness
-
 
 
     @Override
@@ -83,25 +68,23 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
 
         image = (ImageView) findViewById(R.id.profilePicture); //set up image view
         name = (TextView) findViewById(R.id.name);
-        age = (TextView)findViewById(R.id.ProfileAge);
-        ft = (TextView)findViewById(R.id.Height_ft);
+        age = (TextView) findViewById(R.id.ProfileAge);
+        ft = (TextView) findViewById(R.id.Height_ft);
         in = (TextView) findViewById(R.id.Height_in);
         weight = (TextView) findViewById(R.id.ProfileWeight);
         context = this;
 
         savedData = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if(savedData.contains("initialized") && savedData.contains("uImage")){
-            name.setText(savedData.getString("uName", "name"));
-            age.setText("Age: " + savedData.getString("uAge", "age"));
-            weight.setText("Wt: " + savedData.getString("uWeight", "weight"));
-            ft.setText("Ht: " + savedData.getString("uFeet", "ft") + "'");
-            in.setText(savedData.getString("uInches", "in"));
-
+        if (savedData.contains("uImage")) {
             String bmString = savedData.getString("uImage", "image");
             bm = decodeBase64(bmString);
 
             image.setImageBitmap(bm);
+
+        }
+        if (savedData.contains("initialized")) {
+            LoadAction();
         }
 
 
@@ -114,7 +97,16 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
 
     }
 
-    public void showSettingsAlert(){
+    public void LoadAction() {
+        //pull data from shared preference
+        name.setText(savedData.getString("uName", "name"));
+        age.setText("Age: " + savedData.getString("uAge", "age"));
+        weight.setText("Wt: " + savedData.getString("uWeight", "weight"));
+        ft.setText("Ht: " + savedData.getString("uFeet", "ft") + "'");
+        in.setText(savedData.getString("uInches", "in"));
+    }
+
+    public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setTitle("Profile Picture");
         alertDialog.setMessage("Select a new profile picture?");
@@ -126,7 +118,7 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
-                intent.setAction(intent.ACTION_GET_CONTENT);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Profile Image"), 1);
             }
         });
@@ -142,11 +134,11 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
         alertDialog.show();
     }
 
-    public void onActivityResult(int reqCode, int resCode, Intent data){
+    public void onActivityResult(int reqCode, int resCode, Intent data) {
         uri = data.getData();
 
-        if(resCode == RESULT_OK){
-            if(reqCode == 1){
+        if (resCode == RESULT_OK) {
+            if (reqCode == 1) {
                 image.setImageURI(uri);
                 bm = ((BitmapDrawable) image.getDrawable()).getBitmap();
             }
@@ -154,15 +146,15 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
 
         SharedPreferences.Editor editor = savedData.edit();
         editor.putString("uImage", encodeTobase64(bm));
-        editor.commit();
+
+        editor.apply();
 
     }
 
     //turn the image into a string
     public static String encodeTobase64(Bitmap image) {
-        Bitmap immage = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 
@@ -176,13 +168,6 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
         return BitmapFactory
                 .decodeByteArray(decodedByte, 0, decodedByte.length);
     }
-
-
-
-
-
-
-
 
 
     @Override
@@ -200,7 +185,7 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
         int id = item.getItemId();
         Intent i;
 
-        switch(id){
+        switch (id) {
             case R.id.about_menu_item:
                 i = new Intent(this, AboutPage.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -261,8 +246,7 @@ public class ProfilePage extends AppCompatActivity implements NavigationDrawerFr
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.main_app_bar, container, false);
-        return rootView;
+        return inflater.inflate(R.layout.main_app_bar, container, false);
     }
 
 

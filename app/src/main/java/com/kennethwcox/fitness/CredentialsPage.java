@@ -1,5 +1,8 @@
 package com.kennethwcox.fitness;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,10 +21,9 @@ import android.widget.Toast;
 
 import static android.widget.Toast.*;
 
-public class CredentialsPage extends AppCompatActivity {
+public class CredentialsPage extends ReportingActivity {
 
     public SharedPreferences save;
-    public static String USER_FILE_DATA = "User_Data";
 
     EditText name;
     EditText age;
@@ -30,12 +32,15 @@ public class CredentialsPage extends AppCompatActivity {
     EditText weight;
 
     Button saveBtn;
+    Button deleteBtn;
 
     String nameSave;
     String ageSave;
     String inchesSave;
     String feetSave;
     String weightSave;
+
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +52,11 @@ public class CredentialsPage extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        //initialize the shared prefference
+        //initialize the shared preference
         save = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //set context
+        context = this;
 
         //initialize all the edit text fields
         name = (EditText) findViewById(R.id.name_edit);
@@ -64,6 +72,7 @@ public class CredentialsPage extends AppCompatActivity {
 
         //initialize button
         saveBtn = (Button) findViewById(R.id.saveButton);
+        deleteBtn = (Button) findViewById(R.id.deleteButton);
 
         if (save.contains("initialized")) {
             LoadAction();
@@ -81,7 +90,46 @@ public class CredentialsPage extends AppCompatActivity {
             }
         });
 
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                showSettingsAlert();
+            }
+        });
+
+
+    }
+
+    public void showSettingsAlert() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle("Delete Profile");
+        alertDialog.setMessage("Are You Sure You Want To Delete Your Profile?");
+
+        //if they tap button to select new image
+        alertDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences.Editor editor = save.edit();
+                editor.clear();
+                editor.apply();
+
+                //start new Intent
+                Intent i = new Intent(context, ProfilePage.class);
+                context.startActivity(i);
+            }
+        });
+
+        //if they tap cancel
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertDialog.show();
     }
 
     public void getInformation() {
@@ -104,14 +152,16 @@ public class CredentialsPage extends AppCompatActivity {
     public void SaveAction() {
 
         SharedPreferences.Editor editor = save.edit();
-        editor.clear();
-        editor.putBoolean("initialized", true);
+
+        if(!save.contains("initialized")){
+            editor.putBoolean("initialized", true);
+        }
         editor.putString("uName", nameSave);
         editor.putString("uAge", ageSave);
         editor.putString("uWeight", weightSave);
         editor.putString("uFeet", feetSave);
         editor.putString("uInches", inchesSave);
-        editor.commit();
+        editor.apply();
     }
 
     @Override

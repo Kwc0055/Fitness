@@ -4,7 +4,7 @@
     <!-- About Page Strings-->
     <string name="title_activity_about_page">About</string>
     <string name="myName">Developer: Kenneth Cox</string>
-    <string name="versionName">Version: 0.5.5</string>
+    <string name="versionName">Version: 0.5.6</string>
 
     <!-- menu strings-->
     <string name="about">About</string>
